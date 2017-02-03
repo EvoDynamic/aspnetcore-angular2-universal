@@ -1,4 +1,3 @@
-
 /*
  * _Common_ NgModule to share between our "BASE" App.Browser & App.Server module platforms
  *
@@ -13,7 +12,7 @@ import { RouterModule } from '@angular/router';
 import { Store, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 // Main "APP" Root Component
 import { BaseSharedModule, AppComponent, ROUTES, appReducer } from 'app';
@@ -27,14 +26,17 @@ import {
     RestTestComponent,
     BootstrapComponent,
     LoginComponent,
-    ExamplesComponent
+    ExamplesComponent,
+    ChatComponent,
+    NotFoundComponent
 } from 'app-containers';
 
 // Provider (aka: "shared" | "services") imports
 import {
     HttpCacheService, CacheService, // Universal : XHR Cache
     ApiGatewayService, 
-    RxContextDirective
+    RxContextDirective,
+    Meta
 } from 'app-shared';
 
 //////////////////////////////////////////////////////////////////
@@ -59,7 +61,7 @@ const MODULES = [
     EffectsModule,
 
     // Bootstrap
-    Ng2BootstrapModule,
+    Ng2BootstrapModule.forRoot(),
 
     // Routing
     RouterModule.forRoot(ROUTES)
@@ -78,6 +80,8 @@ const COMPONENTS = [
     LoginComponent,
     BootstrapComponent,
     ExamplesComponent,
+    ChatComponent,
+    NotFoundComponent,
 
     // Directives
     RxContextDirective
@@ -87,7 +91,9 @@ const PROVIDERS = [
     // put shared services here
     CacheService,
     HttpCacheService,
-    ApiGatewayService
+    ApiGatewayService,
+    
+    Meta // MetaService is a cross platform way to change title, and update anything in the <head>
 ];
 
 @NgModule({
